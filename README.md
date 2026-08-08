@@ -57,40 +57,42 @@ Users can enter their personal information, education, skills, projects, experie
 # 📁 Project Structure
 
 ```text
-ai-resume-builder/
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── PersonalInfo.jsx
-│   │   │   ├── Summary.jsx
-│   │   │   ├── Education.jsx
-│   │   │   ├── Skills.jsx
-│   │   │   ├── Projects.jsx
-│   │   │   ├── Experience.jsx
-│   │   │   ├── Hobbies.jsx
-│   │   │   ├── ResumePreview.jsx
-│   │   │   └── TemplateSelector.jsx
-│   │   │
-│   │   ├── pages/
-│   │   │   └── ResumeBuilder.jsx
-│   │   │
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   │
-│   ├── package.json
-│   ├── vite.config.js
-│   └── .env
-│
-├── backend/
-│   ├── main.py
-│   ├── ai_service.py
-│   ├── .env
-│   ├── requirements.txt
-│   └── venv/
-│
-├── .gitignore
-└── README.md
+AI REMUME/
+└── ai-resume-builder/
+    ├── backend/
+    │   ├── venv/                      # Python virtual environment
+    │   ├── __pycache__/
+    │   ├── .env                       # Environment variables (API keys)
+    │   ├── .gitignore
+    │   ├── ai_service.py              # Gemini API integration logic
+    │   ├── example_env                # Template for environment variables
+    │   ├── main.py                    # FastAPI application entry point
+    │   └── requirements.txt           # Python dependencies
+    ├── node_modules/                  # Frontend dependencies
+    ├── public/                        # Public static assets
+    ├── src/
+    │   ├── assets/                    # Images, icons, etc.
+    │   ├── components/                # React form and UI components
+    │   │   ├── Education.jsx
+    │   │   ├── Experience.jsx
+    │   │   ├── Hobbies.jsx
+    │   │   ├── PersonalInfo.jsx
+    │   │   ├── Projects.jsx
+    │   │   ├── ResumePreview.jsx
+    │   │   ├── Skills.jsx
+    │   │   ├── Summary.jsx
+    │   │   └── TemplateSelector.jsx
+    │   ├── pages/                     # Main page layouts
+    │   │   ├── ResumeBuilder.css
+    │   │   └── ResumeBuilder.jsx
+    │   ├── App.css
+    │   ├── App.jsx                    # Root React component
+    │   ├── index.css
+    │   └── main.jsx                   # React entry point
+    ├── .env                           # Frontend environment variables
+    ├── .gitignore
+    ├── eslint.config.js
+    └── index.html
 ```
 
 ---
