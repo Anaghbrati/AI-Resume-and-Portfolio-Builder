@@ -3,6 +3,10 @@ import { useState } from "react";
 function Projects({ projects, setResume }) {
   const [loadingIndex, setLoadingIndex] = useState(null);
 
+  // Dynamic API Base URL: Uses Vercel environment variable in production, falls back to local backend
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+
   const addProject = () => {
     setResume((prev) => ({
       ...prev,
@@ -56,18 +60,16 @@ function Projects({ projects, setResume }) {
     try {
       setLoadingIndex(index);
 
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/improve-project",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            description: description,
-          }),
-        }
-      );
+      // Uses dynamic URL matching local or deployed backend
+      const response = await fetch(`${API_BASE_URL}/api/improve-project`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          description: description,
+        }),
+      });
 
       const data = await response.json();
 
