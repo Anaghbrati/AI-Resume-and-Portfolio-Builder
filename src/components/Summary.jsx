@@ -1,11 +1,8 @@
+
 import { useState } from "react";
 
 function Summary({ summary, setResume }) {
   const [loading, setLoading] = useState(false);
-
-  // Dynamic API URL: Uses environment variable on Vercel, falls back to local backend
-  const API_BASE_URL =
-    import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
   const handleChange = (e) => {
     setResume((prev) => ({
@@ -25,16 +22,18 @@ function Summary({ summary, setResume }) {
     try {
       setLoading(true);
 
-      const response = await fetch(`${API_BASE_URL}/api/improve-summary`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // Payload matches the FastAPI endpoint expectation
-          description: currentSummary,
-        }),
-      });
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/improve-summary",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            description: currentSummary,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -47,9 +46,10 @@ function Summary({ summary, setResume }) {
         ...prev,
         summary: data.improved,
       }));
+
     } catch (error) {
       console.error("AI Summary Error:", error);
-      alert("Unable to improve the summary. Please check your network or backend deployment.");
+      alert("Unable to improve the summary. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -77,7 +77,9 @@ function Summary({ summary, setResume }) {
         onClick={improveWithAI}
         disabled={loading}
       >
-        {loading ? "✨ Improving..." : "✨ Improve Summary with AI"}
+        {loading
+          ? "✨ Improving..."
+          : "✨ Improve Summary with AI"}
       </button>
     </div>
   );
