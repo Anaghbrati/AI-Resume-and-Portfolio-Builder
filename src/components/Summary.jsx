@@ -37,11 +37,14 @@ function Summary({ summary, setResume }) {
 
       const data = await response.json();
 
+      console.log("Summary API Response:", data);
+
       if (!response.ok || !data.success) {
-        throw new Error(data.message || "AI summary improvement failed");
+        throw new Error(
+          data.message || "AI summary improvement failed"
+        );
       }
 
-      // Update resume summary with AI response
       setResume((prev) => ({
         ...prev,
         summary: data.improved,
@@ -49,7 +52,10 @@ function Summary({ summary, setResume }) {
 
     } catch (error) {
       console.error("AI Summary Error:", error);
-      alert("Unable to improve the summary. Please try again.");
+
+      alert(
+        "Unable to improve summary:\n" + error.message
+      );
     } finally {
       setLoading(false);
     }
@@ -73,7 +79,7 @@ function Summary({ summary, setResume }) {
 
       <button
         type="button"
-        className="ai-small-button"
+        className="ai-small-button summary-button"
         onClick={improveWithAI}
         disabled={loading}
       >
@@ -86,3 +92,4 @@ function Summary({ summary, setResume }) {
 }
 
 export default Summary;
+

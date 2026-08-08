@@ -1,4 +1,9 @@
+
+import { useState } from "react";
+
 function Experience({ experience, setResume }) {
+  const [loadingIndex, setLoadingIndex] = useState(null);
+
   const addExperience = () => {
     setResume((prev) => ({
       ...prev,
@@ -34,6 +39,64 @@ function Experience({ experience, setResume }) {
     });
   };
 
+  // ✨ Improve experience description using Gemini
+  const improveWithAI = async (index) => {
+    const description = experience[index].description.trim();
+
+    if (!description) {
+      alert("Please enter an experience description first.");
+      return;
+    }
+
+    try {
+      setLoadingIndex(index);
+
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/improve-experience",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            description: description,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message || "AI improvement failed"
+        );
+      }
+
+      // Update experience description with AI response
+      setResume((prev) => {
+        const updatedExperience = [...prev.experience];
+
+        updatedExperience[index] = {
+          ...updatedExperience[index],
+          description: data.improved,
+        };
+
+        return {
+          ...prev,
+          experience: updatedExperience,
+        };
+      });
+    } catch (error) {
+      console.error("AI Experience Error:", error);
+
+      alert(
+        "Unable to improve the experience. Please try again."
+      );
+    } finally {
+      setLoadingIndex(null);
+    }
+  };
+
   const removeExperience = (index) => {
     setResume((prev) => ({
       ...prev,
@@ -42,7 +105,7 @@ function Experience({ experience, setResume }) {
   };
 
   return (
-    <div className="section">
+    <div className="experience-section">
       <h2>Experience</h2>
 
       {experience.map((exp, index) => (
@@ -125,15 +188,18 @@ function Experience({ experience, setResume }) {
 
           <div className="experience-actions">
             <button
+              type="button"
               className="ai-small-button"
-              onClick={() => {
-                console.log("AI improvement coming soon");
-              }}
+              onClick={() => improveWithAI(index)}
+              disabled={loadingIndex === index}
             >
-              ✨ Improve with AI
+              {loadingIndex === index
+                ? "✨ Improving..."
+                : "✨ Improve with AI"}
             </button>
 
             <button
+              type="button"
               className="remove-button"
               onClick={() => removeExperience(index)}
             >
@@ -143,9 +209,14 @@ function Experience({ experience, setResume }) {
         </div>
       ))}
 
-      <button className="add-button" onClick={addExperience}>
+      <button
+        type="button"
+        className="add-button"
+        onClick={addExperience}
+      >
         + Add Experience
       </button>
+      <br /> <br />
     </div>
   );
 }
