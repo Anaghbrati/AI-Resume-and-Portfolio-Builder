@@ -1,8 +1,8 @@
 # 🤖 AI Resume & Portfolio Builder
 
-An AI-powered resume builder that helps users create professional, ATS-friendly resumes using **React, FastAPI, and Google Gemini AI**.
+An AI-powered resume builder that helps users create professional, ATS-friendly resumes using **React, FastAPI, Python, and Google Gemini AI**.
 
-Users can enter their personal information, education, skills, projects, experience, and hobbies. AI can improve individual sections or generate an improved resume automatically. The completed resume can also be exported as a PDF.
+Users can enter their personal information, education, skills, projects, work experience, and hobbies. Gemini AI can improve individual resume sections or generate an improved complete resume. The finished resume can also be downloaded as a PDF with clickable links.
 
 ---
 
@@ -18,10 +18,12 @@ Users can enter their personal information, education, skills, projects, experie
 * 🤖 AI-powered project description improvement
 * 🤖 AI-powered experience description improvement
 * 🤖 AI-powered professional summary improvement
-* ✨ Generate complete resume with AI
+* ✨ AI-powered complete resume generation
 * 👀 Live resume preview
 * 📄 Download resume as PDF
-* 🔗 Clickable LinkedIn, GitHub and project links
+* 🔗 Clickable LinkedIn links
+* 🔗 Clickable GitHub links
+* 🔗 Clickable project/live-demo links
 * ⚡ React + Vite frontend
 * 🚀 FastAPI backend
 * 🧠 Google Gemini API integration
@@ -30,16 +32,17 @@ Users can enter their personal information, education, skills, projects, experie
 
 # 🛠️ Tech Stack
 
-### Frontend
+## Frontend
 
 * React
 * Vite
 * JavaScript
 * HTML
 * CSS
-* html2pdf.js
+* html2canvas
+* jsPDF
 
-### Backend
+## Backend
 
 * Python
 * FastAPI
@@ -48,7 +51,7 @@ Users can enter their personal information, education, skills, projects, experie
 * python-dotenv
 * Google GenAI SDK
 
-### AI
+## AI
 
 * Google Gemini API
 
@@ -59,20 +62,25 @@ Users can enter their personal information, education, skills, projects, experie
 ```text
 AI REMUME/
 └── ai-resume-builder/
+    │
     ├── backend/
-    │   ├── venv/                      # Python virtual environment
-    │   ├── __pycache__/
-    │   ├── .env                       # Environment variables (API keys)
+    │   ├── venv/                       # Python virtual environment
+    │   ├── __pycache__/                # Python cache files
+    │   ├── .env                        # Gemini API key
     │   ├── .gitignore
-    │   ├── ai_service.py              # Gemini API integration logic
-    │   ├── example_env                # Template for environment variables
-    │   ├── main.py                    # FastAPI application entry point
-    │   └── requirements.txt           # Python dependencies
-    ├── node_modules/                  # Frontend dependencies
-    ├── public/                        # Public static assets
+    │   ├── ai_service.py               # Gemini AI integration
+    │   ├── example_env                 # Environment variable template
+    │   ├── main.py                     # FastAPI application
+    │   └── requirements.txt            # Python dependencies
+    │
+    ├── node_modules/                   # Frontend dependencies
+    │
+    ├── public/                         # Public static assets
+    │
     ├── src/
-    │   ├── assets/                    # Images, icons, etc.
-    │   ├── components/                # React form and UI components
+    │   ├── assets/                     # Images, icons, etc.
+    │   │
+    │   ├── components/
     │   │   ├── Education.jsx
     │   │   ├── Experience.jsx
     │   │   ├── Hobbies.jsx
@@ -82,17 +90,23 @@ AI REMUME/
     │   │   ├── Skills.jsx
     │   │   ├── Summary.jsx
     │   │   └── TemplateSelector.jsx
-    │   ├── pages/                     # Main page layouts
+    │   │
+    │   ├── pages/
     │   │   ├── ResumeBuilder.css
     │   │   └── ResumeBuilder.jsx
+    │   │
     │   ├── App.css
-    │   ├── App.jsx                    # Root React component
+    │   ├── App.jsx
     │   ├── index.css
-    │   └── main.jsx                   # React entry point
-    ├── .env                           # Frontend environment variables
+    │   └── main.jsx
+    │
+    ├── .env                            # Frontend environment variables
     ├── .gitignore
     ├── eslint.config.js
-    └── index.html
+    ├── index.html
+    ├── package.json
+    ├── package-lock.json
+    └── vite.config.js
 ```
 
 ---
@@ -106,60 +120,34 @@ The frontend uses:
 ```text
 react
 react-dom
-html2pdf.js
+html2canvas
+jspdf
+```
+
+You can check the installed dependencies in:
+
+```text
+package.json
 ```
 
 ### Install frontend dependencies
 
-Navigate to the frontend directory:
-
-```bash
-cd frontend
-```
-
-If the project already has `package.json`:
+From the project root:
 
 ```bash
 npm install
 ```
 
-Install the PDF dependency:
+Install the required PDF libraries:
 
 ```bash
-npm install html2pdf.js
+npm install html2canvas jspdf
 ```
 
-If you are creating the project from scratch:
+If React/Vite has not been installed yet:
 
 ```bash
-npm create vite@latest frontend
-```
-
-Select:
-
-```text
-React
-JavaScript
-```
-
-Then:
-
-```bash
-cd frontend
-npm install
-npm install html2pdf.js
-```
-
-Run the frontend:
-
-```bash
-npm run dev
-```
-
-The frontend will normally run at:
-
-```text
-http://localhost:5173
+npm install react react-dom
 ```
 
 ---
@@ -176,16 +164,52 @@ python-dotenv
 google-genai
 ```
 
-Create a virtual environment:
+---
+
+# 📄 Backend requirements.txt
+
+Create/update:
+
+```text
+backend/requirements.txt
+```
+
+with:
+
+```text
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+google-genai
+```
+
+Then install them:
 
 ```bash
 cd backend
+pip install -r requirements.txt
+```
+
+---
+
+# 🐍 Create Python Virtual Environment
+
+From the project root:
+
+```bash
+cd backend
+```
+
+Create the virtual environment:
+
+```bash
 python -m venv venv
 ```
 
 ### Windows
 
-Activate the virtual environment:
+Activate it:
 
 ```bash
 venv\Scripts\activate
@@ -197,33 +221,7 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-Install dependencies:
-
-```bash
-pip install fastapi uvicorn pydantic python-dotenv google-genai
-```
-
----
-
-# 📄 requirements.txt
-
-Create:
-
-```text
-backend/requirements.txt
-```
-
-Add:
-
-```text
-fastapi
-uvicorn[standard]
-pydantic
-python-dotenv
-google-genai
-```
-
-Then install everything using:
+Then install dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -233,9 +231,9 @@ pip install -r requirements.txt
 
 # 🔑 Gemini API Key Setup
 
-The AI functionality requires a Google Gemini API key.
+This project uses Google Gemini for AI-powered resume improvement.
 
-Create an API key using:
+Create a Gemini API key through Google AI Studio.
 
 [Google AI Studio](https://aistudio.google.com/?utm_source=chatgpt.com)
 
@@ -251,51 +249,33 @@ Add:
 GEMINI_API_KEY=YOUR_GEMINI_API_KEY
 ```
 
-Do **not** put your Gemini API key inside React/Vite.
+Example:
 
-Do **not** commit `.env` to GitHub.
-
----
-
-# 🔒 .gitignore
-
-Create a `.gitignore` file in the project root:
-
-```gitignore
-# Backend
-backend/.env
-backend/venv/
-__pycache__/
-*.pyc
-
-# Frontend
-frontend/node_modules/
-frontend/dist/
-frontend/.env
-
-# Environment files
-.env
-.env.local
-.env.production
+```env
+GEMINI_API_KEY=AIzaSyXXXXXXXXXXXXXXXXXXXXXXXX
 ```
+
+**Never commit your API key to GitHub.**
 
 ---
 
 # ⚙️ Frontend Environment Variable
 
-For local development, create:
+Your React frontend can use an environment variable to determine the backend URL.
+
+Create:
 
 ```text
-frontend/.env
+.env
 ```
 
-Add:
+in the project root:
 
 ```env
 VITE_API_BASE_URL=http://127.0.0.1:8000
 ```
 
-Then in React:
+Your React components can then use:
 
 ```javascript
 const API_BASE_URL =
@@ -311,17 +291,52 @@ fetch(`${API_BASE_URL}/api/improve-summary`)
 
 ---
 
+# 🔒 .gitignore
+
+Make sure your root `.gitignore` contains:
+
+```gitignore
+# Dependencies
+node_modules/
+
+# Build
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Python
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+
+# Backend environment
+backend/.env
+
+# Python cache
+__pycache__/
+*.pyc
+```
+
+---
+
 # 🚀 Running the Project Locally
 
-You need **two terminals**.
+The project requires **two terminals**.
 
-## Terminal 1 — Backend
+---
+
+## Terminal 1 — Start Backend
+
+Open a terminal and run:
 
 ```bash
 cd backend
 ```
 
-Activate virtual environment:
+Activate the virtual environment:
 
 ```bash
 venv\Scripts\activate
@@ -333,13 +348,13 @@ Start FastAPI:
 uvicorn main:app --reload
 ```
 
-Backend:
+Backend will run at:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-API documentation:
+FastAPI documentation:
 
 ```text
 http://127.0.0.1:8000/docs
@@ -347,14 +362,15 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## Terminal 2 — Frontend
+## Terminal 2 — Start Frontend
+
+From the project root:
 
 ```bash
-cd frontend
 npm run dev
 ```
 
-Frontend:
+The frontend will normally run at:
 
 ```text
 http://localhost:5173
@@ -364,13 +380,13 @@ http://localhost:5173
 
 # 🔌 API Endpoints
 
-### Test Backend
+## Backend Health Check
 
 ```http
 GET /
 ```
 
-Returns:
+Response:
 
 ```json
 {
@@ -380,13 +396,13 @@ Returns:
 
 ---
 
-### API Test
+## API Test
 
 ```http
 GET /api/test
 ```
 
-Returns:
+Response:
 
 ```json
 {
@@ -397,7 +413,7 @@ Returns:
 
 ---
 
-### Improve Project
+## 🤖 Improve Project
 
 ```http
 POST /api/improve-project
@@ -423,7 +439,7 @@ Response:
 
 ---
 
-### Improve Summary
+## 🤖 Improve Summary
 
 ```http
 POST /api/improve-summary
@@ -437,9 +453,11 @@ Request:
 }
 ```
 
+The Gemini model improves the summary while keeping the information truthful.
+
 ---
 
-### Improve Experience
+## 🤖 Improve Experience
 
 ```http
 POST /api/improve-experience
@@ -453,9 +471,11 @@ Request:
 }
 ```
 
+The AI converts the description into professional, ATS-friendly resume content.
+
 ---
 
-### Generate Complete Resume
+## ✨ Generate Complete Resume
 
 ```http
 POST /api/generate-resume
@@ -466,7 +486,14 @@ Request:
 ```json
 {
   "resume": {
-    "personal": {},
+    "personal": {
+      "name": "",
+      "email": "",
+      "phone": "",
+      "location": "",
+      "linkedin": "",
+      "github": ""
+    },
     "summary": "",
     "education": [],
     "skills": [],
@@ -477,55 +504,104 @@ Request:
 }
 ```
 
-The AI processes the provided resume data and returns an improved resume.
+The backend sends the resume information to Gemini and returns an improved resume.
 
 ---
 
-# 🤖 AI Functionality
+# 🧠 AI Architecture
 
-The project uses Gemini for four major AI features:
-
-```text
-Improve Project
-       ↓
-Gemini
-       ↓
-ATS-friendly project description
-```
+The application follows this structure:
 
 ```text
-Improve Summary
-       ↓
-Gemini
-       ↓
-Professional summary
+                 React Frontend
+                       │
+                       │ HTTP Request
+                       ▼
+                 FastAPI Backend
+                       │
+                       ▼
+                ai_service.py
+                       │
+                       ▼
+                 Gemini API
+                       │
+                       ▼
+              Improved Resume Data
+                       │
+                       ▼
+                 React Frontend
+                       │
+                       ▼
+                Resume Preview
 ```
+
+---
+
+# 🤖 AI Features
+
+## Improve Project
 
 ```text
-Improve Experience
-       ↓
+Project Description
+        ↓
+Improve with AI
+        ↓
+FastAPI
+        ↓
 Gemini
-       ↓
-Professional experience description
+        ↓
+Professional Project Description
 ```
+
+---
+
+## Improve Summary
 
 ```text
-Generate Resume
-       ↓
+Professional Summary
+        ↓
+Improve with AI
+        ↓
+FastAPI
+        ↓
 Gemini
-       ↓
-Complete improved resume
+        ↓
+ATS-Friendly Summary
 ```
 
-The AI prompts are designed to:
+---
 
-* Keep information truthful
-* Avoid inventing technologies
-* Avoid inventing achievements
-* Avoid inventing numbers
-* Use strong action verbs
-* Improve ATS compatibility
-* Maintain professional language
+## Improve Experience
+
+```text
+Experience Description
+        ↓
+Improve with AI
+        ↓
+FastAPI
+        ↓
+Gemini
+        ↓
+Professional Experience Description
+```
+
+---
+
+## Generate Complete Resume
+
+```text
+User Resume Data
+        ↓
+Generate Resume with AI
+        ↓
+FastAPI
+        ↓
+Gemini
+        ↓
+Improved Resume
+        ↓
+Live Resume Preview
+```
 
 ---
 
@@ -534,62 +610,73 @@ The AI prompts are designed to:
 The project uses:
 
 ```text
-html2pdf.js
-```
-
-to convert the resume preview into a PDF.
-
-Because the resume contains HTML links such as:
-
-```jsx
-<a href={resume.personal.linkedin}>
-  LinkedIn
-</a>
+html2canvas
 ```
 
 and:
 
-```jsx
-<a href={resume.personal.github}>
-  GitHub
-</a>
+```text
+jsPDF
 ```
 
-the generated PDF can preserve clickable links.
+to generate the resume PDF.
+
+The process is:
+
+```text
+Resume Preview
+      ↓
+html2canvas
+      ↓
+Canvas/Image
+      ↓
+jsPDF
+      ↓
+PDF
+```
+
+The resume can include clickable:
+
+* LinkedIn
+* GitHub
+* Live Demo
+* Project URLs
 
 ---
 
-# 🧪 Development Workflow
+# 🧪 Testing the Backend
 
-Recommended development order:
+After starting FastAPI, open:
 
 ```text
-1. Start FastAPI
+http://127.0.0.1:8000/docs
+```
+
+You can test all API endpoints directly through Swagger UI.
+
+Recommended testing order:
+
+```text
+1. GET /
         ↓
-2. Start React
+2. GET /api/test
         ↓
-3. Test /api/test
+3. POST /api/improve-summary
         ↓
-4. Test Summary AI
+4. POST /api/improve-project
         ↓
-5. Test Project AI
+5. POST /api/improve-experience
         ↓
-6. Test Experience AI
-        ↓
-7. Test Generate Resume AI
-        ↓
-8. Test PDF generation
-        ↓
-9. Test clickable links
+6. POST /api/generate-resume
 ```
 
 ---
 
 # ⚠️ Gemini API Limits
 
-Gemini API usage may be subject to rate limits and quotas.
+Gemini API usage may have rate limits or quotas.
 
-If you receive errors such as:
+You may receive errors such as:
 
 ```text
 429
@@ -598,11 +685,11 @@ Quota exceeded
 Rate limit exceeded
 ```
 
-you have likely reached the API quota or rate limit.
+This generally means the API quota or rate limit has been reached.
 
-Avoid repeatedly clicking AI buttons while testing.
+Avoid repeatedly clicking the AI buttons while testing.
 
-Check your API usage in:
+You can check your Gemini API usage through:
 
 [Google AI Studio](https://aistudio.google.com/?utm_source=chatgpt.com)
 
@@ -610,56 +697,131 @@ Check your API usage in:
 
 # 🔐 Security
 
-Never expose:
+The Gemini API key must remain on the backend.
 
-```text
-GEMINI_API_KEY
-```
-
-in frontend code.
-
-❌ Do not do:
+### ❌ Do not put the key in React
 
 ```javascript
-const API_KEY = "your-gemini-api-key";
+const API_KEY = "YOUR_GEMINI_API_KEY";
 ```
 
-✅ Instead:
-
-```text
-React
-  ↓
-FastAPI
-  ↓
-Gemini API
-```
-
-The Gemini API key stays inside:
+### ✅ Keep it in
 
 ```text
 backend/.env
 ```
 
+The intended architecture is:
+
+```text
+React
+  │
+  │ API Request
+  ▼
+FastAPI
+  │
+  │ API Key
+  ▼
+Gemini API
+```
+
+This prevents exposing the Gemini API key in the browser.
+
 ---
 
-# 📌 Future Improvements
+# 💻 Useful Commands
 
-Possible future features:
+## Install frontend dependencies
+
+```bash
+npm install
+```
+
+## Start frontend
+
+```bash
+npm run dev
+```
+
+## Build frontend
+
+```bash
+npm run build
+```
+
+## Create Python environment
+
+```bash
+cd backend
+python -m venv venv
+```
+
+## Activate Python environment — Windows
+
+```bash
+venv\Scripts\activate
+```
+
+## Install backend dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## Start backend
+
+```bash
+uvicorn main:app --reload
+```
+
+---
+
+# 🛠️ Development Workflow
+
+```text
+Start Backend
+     ↓
+Start React Frontend
+     ↓
+Test FastAPI
+     ↓
+Enter Resume Information
+     ↓
+Improve Summary
+     ↓
+Improve Projects
+     ↓
+Improve Experience
+     ↓
+Generate Complete Resume
+     ↓
+Check Live Preview
+     ↓
+Check Links
+     ↓
+Download PDF
+```
+
+---
+
+# 🚀 Future Improvements
+
+Possible future features include:
 
 * 📊 AI Resume Score
-* 🎯 Job Description matching
-* 🔍 ATS compatibility checker
-* 📝 AI cover letter generator
-* 💼 Portfolio generator
-* 📈 Skill gap analysis
-* 🎨 More resume templates
-* 📥 Resume upload and analysis
-* 🔗 LinkedIn profile analysis
-* 📱 Responsive mobile design
-* 🌐 Deployment
-* 🔐 User authentication
-* 💾 Save resumes
-* 📚 Multiple resume versions
+* 🎯 Job Description / Resume Matching
+* 🔍 ATS Compatibility Checker
+* 📝 AI Cover Letter Generator
+* 💼 Portfolio Website Generator
+* 📈 Skill Gap Analysis
+* 🎨 Additional Resume Templates
+* 📄 Resume Upload and AI Analysis
+* 🔗 LinkedIn Profile Analysis
+* 📱 Mobile Responsive UI
+* 🔐 User Authentication
+* 💾 Save Multiple Resumes
+* 📚 Multiple Resume Versions
+* 🌐 Production Deployment
 
 ---
 
@@ -669,15 +831,54 @@ Possible future features:
 
 B.Tech Computer Science Engineering
 
-Built using React, FastAPI, Python and Google Gemini AI.
-
 ---
 
 # ⭐ Project Goal
 
-The goal of this project is to make resume creation easier by combining a traditional resume builder with generative AI.
+The goal of this project is to combine a traditional resume builder with generative AI.
 
-Users provide their real information, while AI helps transform that information into clear, professional and ATS-friendly resume content without inventing qualifications or achievements.
+Users provide their **real information**, while Gemini AI helps transform that information into clear, professional and ATS-friendly resume content.
 
+The AI is instructed to:
+
+* Keep information truthful
+* Avoid inventing technologies
+* Avoid inventing experience
+* Avoid inventing achievements
+* Avoid inventing numbers
+* Use strong action verbs
+* Improve professional language
+* Improve ATS compatibility
+
+---
+
+## 📌 Quick Start
+
+If the project is already cloned, the quickest setup is:
+
+### Backend
+
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload
 ```
+
+### Frontend
+
+Open another terminal in the project root:
+
+```bash
+npm install
+npm run dev
 ```
+
+Then open:
+
+```text
+http://localhost:5173
+```
+
+Your AI Resume Builder is now running locally.
