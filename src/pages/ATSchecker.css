@@ -1,0 +1,376 @@
+/* ========================================
+   ATS CHECKER
+======================================== */
+
+.ats-checker-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 50px auto;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.ats-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.ats-header h1 {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.ats-header p {
+  color: #777;
+  font-size: 16px;
+}
+
+
+/* ========================================
+   UPLOAD CARD
+======================================== */
+
+.ats-upload-card {
+  background: white;
+  border: 2px dashed #d5d5d5;
+  border-radius: 18px;
+  padding: 45px 30px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.upload-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.ats-upload-card h2 {
+  margin-bottom: 8px;
+}
+
+.ats-upload-card p {
+  color: #777;
+  margin-bottom: 25px;
+}
+
+
+/* ========================================
+   UPLOAD BUTTON
+======================================== */
+
+.ats-upload-button {
+  display: inline-block;
+  padding: 12px 25px;
+  background: #111;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.ats-upload-button:hover {
+  opacity: 0.85;
+}
+
+
+/* ========================================
+   SELECTED FILE
+======================================== */
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  max-width: 500px;
+  margin: 25px auto;
+
+  padding: 15px;
+
+  background: #f6f6f6;
+
+  border-radius: 10px;
+
+  text-align: left;
+}
+
+.file-icon {
+  font-size: 30px;
+}
+
+.file-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  overflow: hidden;
+}
+
+.file-info strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-info small {
+  color: #777;
+}
+
+
+/* ========================================
+   ERROR
+======================================== */
+
+.ats-error {
+  max-width: 600px;
+  margin: 15px auto;
+
+  padding: 12px;
+
+  background: #fff1f1;
+
+  color: #d00000;
+
+  border-radius: 8px;
+}
+
+
+/* ========================================
+   ANALYZE BUTTON
+======================================== */
+
+.analyze-button {
+  margin-top: 15px;
+
+  padding: 14px 30px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #6c5ce7;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.analyze-button:hover {
+  opacity: 0.9;
+}
+
+.analyze-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* ========================================
+   LOADING
+======================================== */
+
+.ats-loading {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+
+  margin: 0 auto 20px;
+
+  border: 4px solid #ddd;
+  border-top: 4px solid #6c5ce7;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ========================================
+   RESULTS
+======================================== */
+
+.ats-results {
+  margin-top: 40px;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 25px;
+}
+
+.results-header h2 {
+  margin: 0;
+}
+
+.reset-button {
+  padding: 10px 16px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  background: white;
+
+  cursor: pointer;
+}
+
+
+/* ========================================
+   SCORE CARD
+======================================== */
+
+.ats-score-card {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+
+  padding: 30px;
+
+  background: white;
+
+  border-radius: 18px;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+
+  margin-bottom: 25px;
+}
+
+.score-circle {
+  width: 130px;
+  height: 130px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  border: 10px solid #6c5ce7;
+}
+
+.score-number {
+  font-size: 38px;
+  font-weight: 700;
+}
+
+.score-total {
+  color: #777;
+  font-size: 14px;
+}
+
+.score-content h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.score-content p {
+  color: #666;
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   RESULT CARDS
+======================================== */
+
+.ats-result-card {
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 15px;
+
+  margin-bottom: 20px;
+
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.05);
+}
+
+.ats-result-card h3 {
+  margin-bottom: 18px;
+}
+
+.ats-result-card ul {
+  padding-left: 20px;
+}
+
+.ats-result-card li {
+  margin-bottom: 10px;
+
+  color: #555;
+
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   KEYWORDS
+======================================== */
+
+.keyword-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.keyword {
+  padding: 8px 14px;
+
+  background: #f0edff;
+
+  color: #5b4bd8;
+
+  border-radius: 20px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+
+  .ats-checker-container {
+    width: 94%;
+    margin: 30px auto;
+  }
+
+  .ats-header h1 {
+    font-size: 30px;
+  }
+
+  .ats-score-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .results-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+}

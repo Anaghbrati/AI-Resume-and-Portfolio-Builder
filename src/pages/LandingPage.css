@@ -1,0 +1,306 @@
+/* ========================================
+   LANDING PAGE
+======================================== */
+
+.landing-page {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 60px 30px;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(108, 92, 231, 0.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(0, 184, 148, 0.14),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #f8f9ff 0%,
+      #ffffff 50%,
+      #f5f7ff 100%
+    );
+
+  box-sizing: border-box;
+}
+
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+
+.landing-content {
+  width: 100%;
+  max-width: 1200px;
+
+  text-align: center;
+}
+
+
+/* ========================================
+   HEADING
+======================================== */
+
+.landing-content h1 {
+  margin: 0;
+
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 800;
+
+  line-height: 1.05;
+  letter-spacing: -2px;
+
+  color: #111827;
+}
+
+.landing-content h1 span {
+  background: linear-gradient(
+    90deg,
+    #6c5ce7,
+    #8e7cff,
+    #00b894
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+}
+
+
+/* ========================================
+   SUBTITLE
+======================================== */
+
+.landing-content > p {
+  max-width: 680px;
+
+  margin: 25px auto 50px;
+
+  font-size: 18px;
+  line-height: 1.7;
+
+  color: #6b7280;
+}
+
+
+/* ========================================
+   OPTIONS
+======================================== */
+
+.landing-options {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 25px;
+
+  width: 100%;
+}
+
+
+/* ========================================
+   OPTION CARD
+======================================== */
+
+.option-card {
+  position: relative;
+
+  padding: 35px 28px;
+
+  background: rgba(255, 255, 255, 0.85);
+
+  border: 1px solid rgba(0, 0, 0, 0.07);
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.06);
+
+  backdrop-filter: blur(12px);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.option-card:hover {
+  transform: translateY(-10px);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.12);
+
+  border-color: rgba(108, 92, 231, 0.3);
+}
+
+
+/* ========================================
+   ICON
+======================================== */
+
+.option-icon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 32px;
+
+  border-radius: 18px;
+
+  background: #f0edff;
+
+  box-shadow:
+    0 8px 20px rgba(108, 92, 231, 0.12);
+}
+
+
+/* ========================================
+   CARD TITLE
+======================================== */
+
+.option-card h2 {
+  margin: 0 0 12px;
+
+  font-size: 23px;
+
+  color: #111827;
+}
+
+
+/* ========================================
+   CARD DESCRIPTION
+======================================== */
+
+.option-card p {
+  min-height: 75px;
+
+  margin: 0 0 25px;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+
+  color: #6b7280;
+}
+
+
+/* ========================================
+   CARD BUTTON
+======================================== */
+
+.option-card button {
+  width: 100%;
+
+  padding: 13px 20px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #111827;
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.option-card button:hover {
+  background: #6c5ce7;
+
+  transform: translateY(-2px);
+}
+
+
+/* ========================================
+   INDIVIDUAL CARD COLORS
+======================================== */
+
+.option-card:nth-child(1) .option-icon {
+  background: #eeeaff;
+}
+
+.option-card:nth-child(2) .option-icon {
+  background: #e8fff8;
+}
+
+.option-card:nth-child(3) .option-icon {
+  background: #fff4e6;
+}
+
+
+/* ========================================
+   RESPONSIVE - TABLET
+======================================== */
+
+@media (max-width: 900px) {
+
+  .landing-page {
+    padding: 50px 25px;
+  }
+
+  .landing-options {
+    grid-template-columns: 1fr;
+    max-width: 550px;
+    margin: auto;
+  }
+
+  .option-card p {
+    min-height: auto;
+  }
+}
+
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+  .landing-page {
+    padding: 40px 18px;
+  }
+
+  .landing-content h1 {
+    font-size: 42px;
+    letter-spacing: -1px;
+  }
+
+  .landing-content > p {
+    font-size: 16px;
+
+    margin-top: 20px;
+    margin-bottom: 35px;
+  }
+
+  .landing-options {
+    gap: 18px;
+  }
+
+  .option-card {
+    padding: 28px 22px;
+  }
+
+}

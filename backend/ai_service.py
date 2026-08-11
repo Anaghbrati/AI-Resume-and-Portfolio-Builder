@@ -1,4 +1,3 @@
-
 import os
 import json
 from pathlib import Path
@@ -7,6 +6,10 @@ from dotenv import load_dotenv
 from google import genai
 
 
+# ========================================
+# ENVIRONMENT SETUP
+# ========================================
+
 BASE_DIR = Path(__file__).resolve().parent
 
 load_dotenv(BASE_DIR / ".env")
@@ -14,15 +17,21 @@ load_dotenv(BASE_DIR / ".env")
 api_key = os.getenv("GEMINI_API_KEY")
 
 if not api_key:
-    raise ValueError("GEMINI_API_KEY was not found in backend/.env")
+    raise ValueError(
+        "GEMINI_API_KEY was not found in backend/.env"
+    )
 
+
+# ========================================
+# GEMINI CLIENT
+# ========================================
 
 client = genai.Client(api_key=api_key)
 
 
-# --------------------------------
-# Improve Project
-# --------------------------------
+# ========================================
+# IMPROVE PROJECT
+# ========================================
 
 def improve_project(description):
 
@@ -33,6 +42,7 @@ Improve the following project description for a
 software engineering resume.
 
 Rules:
+
 - Make it professional and concise.
 - Use strong action verbs.
 - Highlight technical work.
@@ -55,9 +65,9 @@ Project description:
     return response.text
 
 
-# --------------------------------
-# Improve Summary
-# --------------------------------
+# ========================================
+# IMPROVE SUMMARY
+# ========================================
 
 def improve_summary(summary):
 
@@ -68,6 +78,7 @@ Improve the following professional summary for a
 software engineering resume.
 
 Rules:
+
 - Make it professional and concise.
 - Keep it ATS-friendly.
 - Use strong professional language.
@@ -92,9 +103,9 @@ Current summary:
     return response.text
 
 
-# --------------------------------
-# Improve Experience
-# --------------------------------
+# ========================================
+# IMPROVE EXPERIENCE
+# ========================================
 
 def improve_experience(description):
 
@@ -105,6 +116,7 @@ Improve the following work experience description
 for a software engineering resume.
 
 Rules:
+
 - Make it professional and concise.
 - Use strong action verbs.
 - Highlight technical responsibilities.
@@ -129,9 +141,9 @@ Experience description:
     return response.text
 
 
-# --------------------------------
-# Generate Complete Resume
-# --------------------------------
+# ========================================
+# GENERATE COMPLETE RESUME
+# ========================================
 
 def generate_resume(resume):
 
@@ -209,3 +221,94 @@ Resume:
 
     return json.loads(result)
 
+
+# ========================================
+# ATS RESUME CHECKER
+# ========================================
+
+def check_ats(pdf_path):
+
+    prompt = """
+You are an expert ATS resume analyzer and technical recruiter.
+
+Analyze the uploaded resume PDF for a software engineering position.
+
+Evaluate:
+
+1. ATS compatibility
+2. Resume structure
+3. Keywords
+4. Technical skills
+5. Professional summary
+6. Projects
+7. Experience
+8. Education
+9. Formatting
+10. Overall readability
+
+Give an ATS score from 0 to 100.
+
+Rules:
+
+- Analyze ONLY information present in the resume.
+- Do not invent information.
+- Do not assume skills that are not present.
+- Give practical suggestions.
+- Focus on software engineering resumes.
+- Consider whether the resume is ATS-friendly.
+- Check whether important sections are present.
+- Check technical keywords.
+- Check clarity and readability.
+
+Return ONLY valid JSON.
+
+Use exactly this structure:
+
+{
+    "score": 0,
+    "summary": "short overall assessment",
+    "strengths": [
+        "strength 1",
+        "strength 2",
+        "strength 3"
+    ],
+    "improvements": [
+        "improvement 1",
+        "improvement 2",
+        "improvement 3"
+    ],
+    "keywords": [
+        "keyword 1",
+        "keyword 2"
+    ]
+}
+"""
+
+    # Upload PDF to Gemini
+    uploaded_file = client.files.upload(
+        file=pdf_path
+    )
+
+    response = client.models.generate_content(
+        model="gemini-3.6-flash",
+        contents=[
+            uploaded_file,
+            prompt
+        ]
+    )
+
+    result = response.text.strip()
+
+    # Remove markdown if Gemini returns ```json
+    if result.startswith("```json"):
+        result = result[7:]
+
+    elif result.startswith("```"):
+        result = result[3:]
+
+    if result.endswith("```"):
+        result = result[:-3]
+
+    result = result.strip()
+
+    return json.loads(result)
