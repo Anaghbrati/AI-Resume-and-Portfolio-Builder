@@ -60,53 +60,56 @@ Users can enter their personal information, education, skills, projects, work ex
 # 📁 Project Structure
 
 ```text
-AI REMUME/
-└── ai-resume-builder/
-    │
-    ├── backend/
-    │   ├── venv/                       # Python virtual environment
-    │   ├── __pycache__/                # Python cache files
-    │   ├── .env                        # Gemini API key
-    │   ├── .gitignore
-    │   ├── ai_service.py               # Gemini AI integration
-    │   ├── example_env                 # Environment variable template
-    │   ├── main.py                     # FastAPI application
-    │   └── requirements.txt            # Python dependencies
-    │
-    ├── node_modules/                   # Frontend dependencies
-    │
-    ├── public/                         # Public static assets
-    │
-    ├── src/
-    │   ├── assets/                     # Images, icons, etc.
-    │   │
-    │   ├── components/
-    │   │   ├── Education.jsx
-    │   │   ├── Experience.jsx
-    │   │   ├── Hobbies.jsx
-    │   │   ├── PersonalInfo.jsx
-    │   │   ├── Projects.jsx
-    │   │   ├── ResumePreview.jsx
-    │   │   ├── Skills.jsx
-    │   │   ├── Summary.jsx
-    │   │   └── TemplateSelector.jsx
-    │   │
-    │   ├── pages/
-    │   │   ├── ResumeBuilder.css
-    │   │   └── ResumeBuilder.jsx
-    │   │
-    │   ├── App.css
-    │   ├── App.jsx
-    │   ├── index.css
-    │   └── main.jsx
-    │
-    ├── .env                            # Frontend environment variables
-    ├── .gitignore
-    ├── eslint.config.js
-    ├── index.html
-    ├── package.json
-    ├── package-lock.json
-    └── vite.config.js
+AI-Resume-and-Portfolio-Builder/
+│
+├── backend/
+│   ├── ai_service.py
+│   ├── ats_service.py
+│   ├── example_env
+│   ├── main.py
+│   └── requirements.txt
+│
+├── public/
+│
+├── src/
+│   ├── components/
+│   │   ├── Education.jsx
+│   │   ├── Experience.jsx
+│   │   ├── Hobbies.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── PersonalInfo.jsx
+│   │   ├── Projects.jsx
+│   │   ├── ResumePreview.jsx
+│   │   ├── Skills.jsx
+│   │   ├── Summary.jsx
+│   │   └── TemplateSelector.jsx
+│   │
+│   ├── pages/
+│   │   ├── data/
+│   │   ├── ATSchecker.css
+│   │   ├── ATSchecker.jsx
+│   │   ├── LandingPage.css
+│   │   ├── LandingPage.jsx
+│   │   ├── PortfolioBuilder.css
+│   │   ├── PortfolioBuilder.jsx
+│   │   ├── PortfolioPreview.css
+│   │   ├── PortfolioPreview.jsx
+│   │   ├── ResumeBuilder.css
+│   │   └── ResumeBuilder.jsx
+│   │
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+│
+├── .gitignore
+├── example_env
+├── index.html
+├── package.json
+├── package-lock.json
+├── README.md
+├── vercel.json
+└── vite.config.js
 ```
 
 ---
