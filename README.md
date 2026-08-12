@@ -229,7 +229,9 @@ Then install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-
+```bash
+python.exe -m pip install --upgrade pip
+```
 ---
 
 # 🔑 Gemini API Key Setup
