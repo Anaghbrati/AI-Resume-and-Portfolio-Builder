@@ -4,6 +4,8 @@ import LandingPage from "./pages/LandingPage";
 import ResumeBuilder from "./pages/ResumeBuilder";
 import ATSchecker from "./pages/ATSchecker";
 import PortfolioBuilder from "./pages/PortfolioBuilder";
+import PortfolioPreview from "./pages/PortfolioPreview";
+
 
 function App() {
   return (
@@ -12,6 +14,11 @@ function App() {
       <Route path="/resume" element={<ResumeBuilder />} />
       <Route path="/ats-checker" element={<ATSchecker />} />
       <Route path="/portfolio" element={<PortfolioBuilder />} />
+      <Route path="/portfolio-preview" element={<PortfolioPreview />} />
+      <Route
+  path="/portfolio/preview"
+  element={<PortfolioPreview />}
+/>
     </Routes>
   );
 }
